@@ -1,5 +1,4 @@
-// @ts-nocheck
-import { Fragment, useContext, useEffect, useState } from 'react'
+import React, { Fragment, useContext, useEffect, useState } from 'react'
 import CyberConnectContext, { ConditionItem } from '../contexts/cyberConnect'
 import { chainItems } from './CyberConnectProvider'
 import { Dialog, Transition } from '@headlessui/react'
@@ -8,7 +7,6 @@ import Selector from './Selector'
 import LitACLItem from './LitACLItem'
 import { PlusCircleIcon } from '@heroicons/react/solid'
 import { booleanLogicItems } from '../contexts/cyberConnect'
-// @ts-ignore
 import LitJsSdk from 'lit-js-sdk'
 import useXmtp from '../hooks/useXmtp'
 import { ethers } from 'ethers'
