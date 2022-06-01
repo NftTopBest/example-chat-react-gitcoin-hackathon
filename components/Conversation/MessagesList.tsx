@@ -26,7 +26,7 @@ const formatDate = (d?: Date) =>
 const MessageTile = ({ message, isSender }: MessageTileProps): JSX.Element => (
   <div className="flex items-start mx-auto mb-4">
     <a
-      href={`http://baidu.com/${message.senderAddress}`}
+      href={`https://dev.web3nft.social/${message.senderAddress}`}
       target="_blank"
       rel="noreferrer"
     >
