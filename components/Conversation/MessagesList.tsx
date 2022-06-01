@@ -25,18 +25,24 @@ const formatDate = (d?: Date) =>
 
 const MessageTile = ({ message, isSender }: MessageTileProps): JSX.Element => (
   <div className="flex items-start mx-auto mb-4">
-    <Avatar peerAddress={message.senderAddress as string} />
+    <a
+      href={`https://dev.web3nft.social/${message.senderAddress}`}
+      target="_blank"
+      rel="noreferrer"
+    >
+      <Avatar peerAddress={message.senderAddress as string} />
+    </a>
     <div className="ml-2">
       <div>
         <AddressPill
           address={message.senderAddress as string}
           userIsSender={isSender}
         />
-        <span className="text-sm font-normal place-self-end text-n-300 text-md uppercase">
+        <span className="text-sm font-normal uppercase place-self-end text-n-300 text-md">
           {formatTime(message.sent)}
         </span>
       </div>
-      <span className="block text-md px-2 mt-2 text-black font-normal">
+      <span className="block px-2 mt-2 font-normal text-black text-md">
         {message.error ? (
           `Error: ${message.error?.message}`
         ) : (
@@ -56,9 +62,9 @@ const DateDividerBorder: React.FC = ({ children }) => (
 )
 
 const DateDivider = ({ date }: { date?: Date }): JSX.Element => (
-  <div className="flex align-items-center items-center pb-8 pt-4">
+  <div className="flex items-center pt-4 pb-8 align-items-center">
     <DateDividerBorder>
-      <span className="mx-11 flex-none text-gray-300 text-sm font-bold">
+      <span className="flex-none text-sm font-bold text-gray-300 mx-11">
         {formatDate(date)}
       </span>
     </DateDividerBorder>
@@ -66,8 +72,8 @@ const DateDivider = ({ date }: { date?: Date }): JSX.Element => (
 )
 
 const ConversationBeginningNotice = (): JSX.Element => (
-  <div className="flex align-items-center justify-center pb-4">
-    <span className="text-gray-300 text-sm font-semibold">
+  <div className="flex justify-center pb-4 align-items-center">
+    <span className="text-sm font-semibold text-gray-300">
       This is the beginning of the conversation
     </span>
   </div>
@@ -81,9 +87,9 @@ const MessagesList = ({
   let lastMessageDate: Date | undefined
 
   return (
-    <div className="flex-grow flex">
-      <div className="pb-6 md:pb-0 w-full flex flex-col self-end">
-        <div className="relative w-full bg-white px-4 pt-6 overflow-y-auto flex">
+    <div className="flex flex-grow">
+      <div className="flex flex-col self-end w-full pb-6 md:pb-0">
+        <div className="relative flex w-full px-4 pt-6 overflow-y-auto bg-white">
           <div className="w-full">
             {messages && messages.length ? (
               <ConversationBeginningNotice />
@@ -96,7 +102,7 @@ const MessagesList = ({
               const dateHasChanged = !isOnSameDay(lastMessageDate, msg.sent)
               lastMessageDate = msg.sent
               return dateHasChanged
-                ? [<DateDivider date={msg.sent} key={msg.id} />, tile]
+                ? [<DateDivider date={msg.sent} key={`date-${msg.id}`} />, tile]
                 : tile
             })}
             <div ref={messagesEndRef} />
